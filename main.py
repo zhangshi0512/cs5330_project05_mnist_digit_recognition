@@ -9,6 +9,7 @@ from torchvision import datasets, transforms
 from torch.utils.data import DataLoader
 import torch.optim as optim
 
+# Main function code for setting up data, training, and saving the model
 def main():
     # Check if CUDA is available and set device to GPU if it is
     device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
