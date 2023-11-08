@@ -3,6 +3,7 @@ from network import MyNetwork
 from train import train, save_model
 from torchvision import datasets, transforms
 from torch.utils.data import DataLoader
+import torch.optim as optim
 
 def main():
     # Check if CUDA is available and set device to GPU if it is

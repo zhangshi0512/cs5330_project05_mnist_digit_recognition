@@ -3,6 +3,7 @@ import torch.optim as optim
 from torch.utils.data import DataLoader
 from torchvision import datasets, transforms
 from network import MyNetwork
+import torch.nn.functional as F
 
 def train(model, device, train_loader, optimizer, epoch):
     model.train()
