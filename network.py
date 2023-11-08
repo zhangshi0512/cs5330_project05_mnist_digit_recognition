@@ -1,9 +1,12 @@
 # Shi Zhang
 # network.py contains the definition of convolutional neural network
+
+# import statements
 import torch
 import torch.nn as nn
 import torch.nn.functional as F
 
+# class definitions
 class MyNetwork(nn.Module):
     def __init__(self):
         super(MyNetwork, self).__init__()

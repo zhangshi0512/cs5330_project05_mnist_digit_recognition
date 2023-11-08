@@ -1,6 +1,7 @@
 # Shi Zhang
 # main.py is the entry point of the project that calls functions from other files
 
+# import statements
 import torch
 from network import MyNetwork
 from train import train, save_model

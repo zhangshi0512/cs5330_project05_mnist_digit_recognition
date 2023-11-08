@@ -1,6 +1,7 @@
 # Shi Zhang
 # train.py include the functions for training and evaluating network
 
+# import statements
 import torch
 import torch.optim as optim
 from torch.utils.data import DataLoader
@@ -8,6 +9,7 @@ from torchvision import datasets, transforms
 from network import MyNetwork
 import torch.nn.functional as F
 
+# Function to train the network
 def train(model, device, train_loader, optimizer, epoch):
     model.train()
     for batch_idx, (data, target) in enumerate(train_loader):
@@ -22,5 +24,6 @@ def train(model, device, train_loader, optimizer, epoch):
                 epoch, batch_idx * len(data), len(train_loader.dataset),
                 100. * batch_idx / len(train_loader), loss.item()))
 
+# Function to save the trained model
 def save_model(model, path='mnist_cnn.pth'):
     torch.save(model.state_dict(), path)
