@@ -1,3 +1,5 @@
+# Shi Zhang
+# network.py contains the definition of convolutional neural network
 import torch
 import torch.nn as nn
 import torch.nn.functional as F

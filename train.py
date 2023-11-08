@@ -1,3 +1,6 @@
+# Shi Zhang
+# train.py include the functions for training and evaluating network
+
 import torch
 import torch.optim as optim
 from torch.utils.data import DataLoader
