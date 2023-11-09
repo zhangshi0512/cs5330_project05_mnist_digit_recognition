@@ -60,14 +60,26 @@ def main():
     test_losses = []
     examples_count = []
 
-    train_loss_accumulated = 0
-    batch_count = 0
+    # Evaluate initial test loss before training
+    model.eval()  # Set the model to evaluation mode
+    initial_test_loss = 0
+    with torch.no_grad():
+        for data, target in test_loader:
+            data, target = data.to(device), target.to(device)
+            output = model(data)
+            initial_test_loss += F.nll_loss(output, target, reduction='sum').item()
+    initial_test_loss /= len(test_loader.dataset)
+    test_losses.append(initial_test_loss)
+    model.train()  # Set the model back to training mode
+
+    # Record the initial test loss
+    print(f'Initial test loss: {initial_test_loss}')
     
     # Set the frequency to evaluate the test loss
     evaluation_frequency = 20000
 
     # Training loop for a specified number of epochs
-    for epoch in range(1, 11):  # 10 epochs as an example
+    for epoch in range(1, 11): 
         model.train()  # Set the model to training mode
 
         for batch_idx, (data, target) in enumerate(train_loader):
@@ -77,36 +89,36 @@ def main():
             loss = F.nll_loss(output, target)  # Use negative log likelihood loss
             loss.backward()
             optimizer.step()
-            train_loss_accumulated += loss.item()  # Accumulate loss over the epoch
-            batch_count += 1  # Increment batch count
-            
+
             # Record training loss and number of examples seen
             if batch_idx % 10 == 0:
                 train_losses.append(loss.item())
                 examples_count.append((epoch - 1) * len(train_loader.dataset) + batch_idx * len(data))
+            
 
-            # Evaluate the test loss at the specified frequency
-            if batch_idx % evaluation_frequency == 0:
-                model.eval()  # Set the model to evaluation mode
-                test_loss = 0
-                with torch.no_grad():
-                    for data, target in test_loader:
-                        data, target = data.to(device), target.to(device)
-                        output = model(data)
-                        test_loss += F.nll_loss(output, target, reduction='sum').item()  # Sum up batch loss
-                test_loss /= len(test_loader.dataset)
-                test_losses.append(test_loss)
-                model.train()  # Set the model back to training mode
+        # Evaluate the test loss at the end of the epoch
+        model.eval()  # Set the model to evaluation mode
+        test_loss = 0
+        with torch.no_grad():
+            for data, target in test_loader:
+                data, target = data.to(device), target.to(device)
+                output = model(data)
+                test_loss += F.nll_loss(output, target, reduction='sum').item()  # Sum up batch loss
+        test_loss /= len(test_loader.dataset)
+        test_losses.append(test_loss)
+        model.train()  # Set the model back to training mode
 
-        # Print the average losses at the end of each epoch
-        print(f'Epoch {epoch}, Train loss: {np.mean(train_losses[-len(train_loader):])}, Test loss: {test_loss}')
+        # Print the average train loss and current test loss
+        print(f'Epoch {epoch}, Train loss: {train_losses[-1]}, Test loss: {test_loss}')
 
-    # Plot the training and test losses
+    # After all epochs, plot the training loss and test loss
     plt.figure(figsize=(10, 5))
     plt.plot(examples_count, train_losses, 'b-', label='Train Loss')  # Blue line for training loss
-    # Interpolate the test loss values for plotting
-    interpolated_test_x = np.linspace(examples_count[0], examples_count[-1], len(test_losses))
-    plt.plot(interpolated_test_x, test_losses, 'r-', label='Test Loss')  # Red line for interpolated test loss
+
+    # Correct the x-values for plotting the test loss, starting with 0 for the initial test loss
+    test_loss_x_values = [0] + [(i + 1) * len(train_loader.dataset) for i in range(epoch)]
+    plt.plot(test_loss_x_values, test_losses, 'ro', label='Test Loss')  # Red dots for test loss
+
     plt.title('Negative Log Likelihood Loss over Number of Training Examples Seen')
     plt.xlabel('Number of Training Examples Seen')
     plt.ylabel('Negative Log Likelihood Loss')
