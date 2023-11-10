@@ -6,6 +6,7 @@ import torch
 import matplotlib.pyplot as plt
 from torchvision import datasets, transforms
 from network import MyNetwork
+from PIL import Image
 
 # Load the test dataset
 test_loader = torch.utils.data.DataLoader(
@@ -44,3 +45,36 @@ for i, ax in enumerate(axs.flatten()):
         ax.set_xticks([])
         ax.set_yticks([])
 plt.show()
+
+# Evaluate the model on new handwritten digits
+# Define the transform for preprocessing the images
+transform = transforms.Compose([
+    transforms.Grayscale(), # Convert to grayscale
+    # transforms.Resize((28, 28)), # Resize to 28x28
+    transforms.ToTensor(), # Convert to a torch tensor
+    transforms.Normalize((0.1307,), (0.3081,)) # Normalize like MNIST
+])
+
+# Digit image paths assuming they are stored in a 'digits' subdirectory
+digit_paths = [f'digits/digit_{i}.png' for i in range(10)]
+
+# Process each digit and run through the network
+for path in digit_paths:
+    # Load the image
+    image = Image.open(path)
+
+    # Apply the transformations
+    image = transform(image)
+
+    # Add a batch dimension (B x C x H x W)
+    image = image.unsqueeze(0)
+
+    # Forward pass through the network
+    output = model(image)
+
+    # Print the output
+    formatted_output = [f"{value:.2f}" for value in output[0].data.numpy()]
+    print(f"Network Output for {path}: ", formatted_output)
+    predicted = torch.argmax(output, 1)
+    print("Predicted Label:", predicted.item())
+    print()

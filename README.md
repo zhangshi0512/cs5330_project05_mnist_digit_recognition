@@ -105,6 +105,47 @@ Actual Label: 9
 
 ##### F. Test the network on new inputs
 
+Hand Written Input:
+
+![model eva](Task1/HandWrittenDigits_invert.png)
+
+Program Output
+
+```
+Network Output for digits/digit_0.png:  ['-0.01', '-5.60', '-6.23', '-10.91', '-6.37', '-11.24', '-8.16', '-9.52', '-5.96', '-7.00']
+Predicted Label: 0
+
+Network Output for digits/digit_1.png:  ['-15.95', '-0.01', '-4.77', '-12.12', '-15.65', '-18.72', '-19.05', '-13.29', '-11.55', '-16.82']
+Predicted Label: 1
+
+Network Output for digits/digit_2.png:  ['-10.44', '-9.21', '-0.00', '-11.95', '-17.75', '-21.12', '-17.68', '-18.31', '-15.30', '-23.77']
+Predicted Label: 2
+
+Network Output for digits/digit_3.png:  ['-14.60', '-2.47', '-9.15', '-5.08', '-1.49', '-7.76', '-17.46', '-0.45', '-12.56', '-3.11']
+Predicted Label: 7
+
+Network Output for digits/digit_4.png:  ['-17.68', '-10.21', '-14.65', '-12.29', '-0.02', '-11.93', '-17.85', '-9.09', '-8.79', '-3.79']
+Predicted Label: 4
+
+Network Output for digits/digit_5.png:  ['-12.98', '-11.97', '-13.84', '-15.18', '-19.50', '-0.01', '-14.14', '-16.92', '-4.43', '-6.19']
+Predicted Label: 5
+
+Network Output for digits/digit_6.png:  ['-13.47', '-15.39', '-15.38', '-14.08', '-11.67', '-3.84', '-0.03', '-25.54', '-4.62', '-19.56']
+Predicted Label: 6
+
+Network Output for digits/digit_7.png:  ['-8.11', '-0.63', '-0.97', '-4.29', '-13.45', '-14.77', '-16.49', '-2.63', '-5.55', '-11.34']
+Predicted Label: 1
+
+Network Output for digits/digit_8.png:  ['-2.95', '-1.35', '-0.58', '-2.97', '-9.21', '-7.37', '-11.29', '-9.68', '-2.57', '-7.59']
+Predicted Label: 2
+
+Network Output for digits/digit_9.png:  ['-6.18', '-0.93', '-1.62', '-7.18', '-4.96', '-5.77', '-6.77', '-1.67', '-1.59', '-9.02']
+Predicted Label: 1
+```
+
+For the hand written input, only 0, 1, 2, 4, 5, 6 were recognized and matched correctly.
+But 3, 7, 8, 9 were identified wrong given the output.
+
 #### Task 2: Examine the network
 
 ##### A. Analyze the first layer
