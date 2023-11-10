@@ -22,6 +22,25 @@ Team: Shi Zhang, ZhiZhou Gu
 
 ##### B. Build a network model
 
+![Network Diagram](Task1/Task1_Network_Diagram.png)
+
+The network model has following layers:
+
+1. MNIST Image Input: 28x28x1 (Grayscale image)
+2. Conv2d: 10 filters, 5x5 kernel, Output Dimension: 24x24x10
+3. ReLU Activation: Dimension: 24x24x10
+4. Max Pooling: 2x2, Output Dimension: 12x12x10
+5. Conv2d: 20 filters, 5x5 kernel, Output Dimension: 8x8x20
+6. Dropout: 0.5, Dimension: 8x8x20
+7. ReLU Activation: Dimension: 8x8x20
+8. Max Pooling: 2x2, Output Dimension: 4x4x20
+9. Flatten: Output Dimension: 320
+10. Linear: 320 to 50, Output Dimension: 50
+11. ReLU Activation: Dimension: 50
+12. Linear: 50 to 10, Output Dimension: 10
+13. Log Softmax: Dimension: 10
+14. Output: Digit Class, Dimension: 10
+
 ##### C. Train the model
 
 ![accuracy scores](Task1/Task1_AccuracyScores0.png)
