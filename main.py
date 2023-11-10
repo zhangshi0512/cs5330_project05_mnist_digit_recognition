@@ -129,7 +129,6 @@ def main():
     # Save the trained model to a file
     save_model(model, 'mnist_model.pth')
 
-# Call the main function if the script is executed
 if __name__ == '__main__':
     main()
 
