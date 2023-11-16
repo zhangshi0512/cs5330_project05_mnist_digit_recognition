@@ -51,7 +51,7 @@ The network model has following layers:
 
 Program Output
 
-```markdown
+```
 Image 1
 Network Output: ['-17.82', '-17.10', '-10.80', '-10.20', '-23.02', '-18.32', '-32.49', '-0.00', '-14.39', '-14.58']
 Predicted Label: 7
@@ -155,6 +155,30 @@ But 3, 7, 8, 9 were identified wrong given the output.
 #### Task 3: Transfer Learning on Greek Letters
 
 #### Task 4: Experimentation with the deep network for the MNIST task
+
+##### A. Develop a plan
+
+In this experimentation phase, the primary objective is to explore the impact of varying different aspects of the deep network architecture on the MNIST Fashion dataset. The MNIST Fashion dataset, being more complex than the standard MNIST digits dataset, serves as an ideal candidate to observe the effects of these architectural changes. The following dimensions have been chosen for this experiment:
+
+- The Number of Filters in Convolution Layers: The options explored are 10, 20, and 30 filters.
+- The Number of Hidden Nodes in the Dense Layer: The numbers tested are 32, 64, 128, and 256 nodes.
+- The Dropout Rate: Different dropout rates tested are 0.3, 0.5, and 0.7.
+
+The experimental approach is structured around a linear search strategy. In this method, two of the parameters will be held constant while varying the third. This process will be repeated in a round-robin fashion, changing the variable parameter each time. The plan is to automate this process to efficiently evaluate 36 (3 x 4 x 3) network variations.
+
+Metrics for evaluation will include accuracy, training time, and loss. These metrics will provide a comprehensive understanding of each network variation's performance and efficiency.
+
+##### B. Predict the results
+
+Number of Filters in Convolution Layers: More filters might improve the network's ability to recognize complex patterns, potentially increasing accuracy but also training time.
+
+Number of Nodes in the Dense Layer: As before, a higher number of nodes might improve accuracy but potentially increase training time and risk of overfitting.
+
+Dropout Rate: Higher dropout rates may improve generalization at the risk of losing relevant features, potentially affecting accuracy.
+
+These hypotheses will be tested against the actual results obtained from the experiment to determine their validity.
+
+##### C. Actual Results
 
 ### 3. Extensions
 
