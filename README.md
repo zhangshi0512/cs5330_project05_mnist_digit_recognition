@@ -180,6 +180,35 @@ These hypotheses will be tested against the actual results obtained from the exp
 
 ##### C. Actual Results
 
+For Accuracy:
+![accuracy-plot](Task4/Task4_Accuracy_Plot_64.png)
+
+For Training Time:
+![nodes-plot](Task4/Task4_TrainingTime_Plot_64.png)
+
+For Average Loss:
+![average-loss](Task4/Task4_AverageLoss_Plot_64.png)
+
+###### Number of Filters in Convolution Layers:
+
+- The accuracy seems to increase with a higher number of filters, suggesting that more filters help the network to capture more complex features from the Fashion MNIST dataset. However, the accuracy plateaus or varies less noticeably beyond a certain point, indicating that there might be an optimal range of filter numbers beyond which the improvement in accuracy is minimal.
+- As predicted, the training time also increases with the number of filters. This is expected since more filters mean more parameters to train.
+- The average loss decreases with more filters initially but levels off, consistent with the accuracy trend.
+
+###### Number of Nodes in the Dense Layer:
+
+- Increasing the number of nodes in the dense layer initially leads to higher accuracy, but further increases do not consistently result in better performance, suggesting a possible overfitting or capacity limit of the network.
+- The training time escalates substantially with more nodes in the dense layer, which aligns with the prediction that a larger network requires more computational resources.
+- The loss decreases as the number of nodes increases but stabilizes, which might imply that the network is large enough to capture the dataset's complexity up to a point.
+
+###### Dropout Rate:
+
+- The accuracy fluctuates with different dropout rates. While higher dropout rates can help with generalization, they can also lead to underfitting if too much information is discarded. There appears to be an optimal dropout rate that balances this trade-off.
+- The training time does not seem to be significantly affected by the dropout rate, which is expected as dropout does not change the number of computations during the forward pass.
+- The loss exhibits some variability with different dropout rates, but there is no clear trend, suggesting that the choice of dropout rate should be carefully tuned to the specific dataset and network architecture.
+
+These results suggest that while increasing the network's capacity can lead to better performance, there is a point of diminishing returns where further increases in capacity do not yield significant improvements and may even lead to overfitting or unnecessary computational expense. The choice of dropout rate is also crucial and requires fine-tuning to avoid both overfitting and underfitting.
+
 ### 3. Extensions
 
 ### 4. Reflection
