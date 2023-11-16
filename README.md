@@ -160,13 +160,13 @@ But 3, 7, 8, 9 were identified wrong given the output.
 
 In this experimentation phase, the primary objective is to explore the impact of varying different aspects of the deep network architecture on the MNIST Fashion dataset. The MNIST Fashion dataset, being more complex than the standard MNIST digits dataset, serves as an ideal candidate to observe the effects of these architectural changes. The following dimensions have been chosen for this experiment:
 
-- The Number of Filters in Convolution Layers: The options explored are 10, 20, and 30 filters.
+- The Number of Filters in Convolution Layers: The options explored are 5, 10, 20, and 30 filters.
 - The Number of Hidden Nodes in the Dense Layer: The numbers tested are 32, 64, 128, and 256 nodes.
-- The Dropout Rate: Different dropout rates tested are 0.3, 0.5, and 0.7.
+- The Dropout Rate: Different dropout rates tested are 0.3, 0.5, 0.7, and 0.9.
 
-The experimental approach is structured around a linear search strategy. In this method, two of the parameters will be held constant while varying the third. This process will be repeated in a round-robin fashion, changing the variable parameter each time. The plan is to automate this process to efficiently evaluate 36 (3 x 4 x 3) network variations.
+The experimental approach is structured around a linear search strategy. In this method, two of the parameters will be held constant while varying the third. This process will be repeated in a round-robin fashion, changing the variable parameter each time. The plan is to automate this process to efficiently evaluate 64 (4 x 4 x 4) network variations.
 
-Metrics for evaluation will include accuracy, training time, and loss. These metrics will provide a comprehensive understanding of each network variation's performance and efficiency.
+Metrics for evaluation will include accuracy, training time, and average loss. These metrics will provide a comprehensive understanding of each network variation's performance and efficiency.
 
 ##### B. Predict the results
 
@@ -191,23 +191,44 @@ For Average Loss:
 
 ###### Number of Filters in Convolution Layers:
 
-- The accuracy seems to increase with a higher number of filters, suggesting that more filters help the network to capture more complex features from the Fashion MNIST dataset. However, the accuracy plateaus or varies less noticeably beyond a certain point, indicating that there might be an optimal range of filter numbers beyond which the improvement in accuracy is minimal.
-- As predicted, the training time also increases with the number of filters. This is expected since more filters mean more parameters to train.
-- The average loss decreases with more filters initially but levels off, consistent with the accuracy trend.
+| Number of Filters | Average Accuracy | Average Loss | Average Training Time (s) |
+| ----------------- | ---------------- | ------------ | ------------------------- |
+| 5                 | 87.13%           | 0.47         | 93.82                     |
+| 10                | 88.50%           | 0.43         | 106.24                    |
+| 20                | 89.10%           | 0.41         | 133.33                    |
+| 30                | 89.32%           | 0.39         | 158.33                    |
+
+- Accuracy modestly increases with more filters, peaking at 89.32% for 30 filters, indicating improved feature capture. However, the marginal gains diminish as the filter count increases.
+- The training time rises with filter count, suggesting a trade-off between accuracy and computational cost.
+- Loss decreases as filters increase but stabilizes, highlighting a potential optimal filter range for efficiency.
 
 ###### Number of Nodes in the Dense Layer:
 
-- Increasing the number of nodes in the dense layer initially leads to higher accuracy, but further increases do not consistently result in better performance, suggesting a possible overfitting or capacity limit of the network.
-- The training time escalates substantially with more nodes in the dense layer, which aligns with the prediction that a larger network requires more computational resources.
-- The loss decreases as the number of nodes increases but stabilizes, which might imply that the network is large enough to capture the dataset's complexity up to a point.
+| Number of Nodes | Average Accuracy | Average Loss | Average Training Time (s) |
+| --------------- | ---------------- | ------------ | ------------------------- |
+| 32              | 88.55%           | 0.46         | 101.78                    |
+| 64              | 88.81%           | 0.40         | 130.99                    |
+| 128             | 88.90%           | 0.39         | 162.94                    |
+| 256             | 88.95%           | 0.39         | 177.95                    |
+
+- Accuracy benefits from more nodes, reaching a high of 88.95% for 256 nodes, but shows diminishing returns for larger dense layers.
+- Training time grows significantly with more nodes, underscoring the increased computational burden.
+- Loss decreases with more nodes but plateaus, suggesting a balanced network capacity is crucial to avoid overfitting.
 
 ###### Dropout Rate:
 
-- The accuracy fluctuates with different dropout rates. While higher dropout rates can help with generalization, they can also lead to underfitting if too much information is discarded. There appears to be an optimal dropout rate that balances this trade-off.
-- The training time does not seem to be significantly affected by the dropout rate, which is expected as dropout does not change the number of computations during the forward pass.
-- The loss exhibits some variability with different dropout rates, but there is no clear trend, suggesting that the choice of dropout rate should be carefully tuned to the specific dataset and network architecture.
+| Dropout Rate | Average Accuracy | Average Loss | Average Training Time (s) |
+| ------------ | ---------------- | ------------ | ------------------------- |
+| 0.3          | 88.95%           | 0.38         | 163.13                    |
+| 0.5          | 88.92%           | 0.40         | 154.77                    |
+| 0.7          | 88.84%           | 0.43         | 155.60                    |
+| 0.9          | 85.32%           | 0.86         | 103.57                    |
 
-These results suggest that while increasing the network's capacity can lead to better performance, there is a point of diminishing returns where further increases in capacity do not yield significant improvements and may even lead to overfitting or unnecessary computational expense. The choice of dropout rate is also crucial and requires fine-tuning to avoid both overfitting and underfitting.
+- Accuracy varies with dropout rates, peaking at 88.95% for a 0.3 rate, and suggests an optimal rate exists for this dataset.
+- Training time is not heavily influenced by dropout rates, aligning with expectations that dropout mainly affects model generalization.
+- Loss is inconsistent across dropout rates, with a notable increase at higher rates, indicating a careful balance is needed to maintain model performance.
+
+In summary, the experiment confirms that while increasing the number of filters and dense layer nodes can enhance model accuracy, there is a balance to be struck to prevent excessive training times and overfitting. The impact of dropout rates on accuracy and loss underscores the importance of tuning this parameter to the specific characteristics of the dataset and model architecture. These insights should guide future architecture decisions and hyperparameter tuning efforts.
 
 ### 3. Extensions
 
