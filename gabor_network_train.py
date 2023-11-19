@@ -1,5 +1,13 @@
 # Shi Zhang
-# gabor_network_train.py contains the definition of the experiment convolutional neural network
+# This script defines and trains a modified convolutional neural network for the MNIST digit recognition task. 
+# The primary modification is the replacement of the first convolutional layer with a fixed Gabor filter bank. 
+# It also includes functions for training, evaluating accuracy, and visualizing training results.
+
+# Key Features:
+# - Implementation of a Gabor filter bank as the first convolutional layer.
+# - Standard convolutional and fully connected layers following the Gabor layer.
+# - Training and evaluation on the MNIST dataset.
+# - Visualization of accuracy, loss, and training time across epochs.
 
 # Import statements
 import cv2
@@ -12,6 +20,7 @@ import numpy as np
 import matplotlib.pyplot as plt
 from time import time
 from collections import OrderedDict
+import csv
 
 # Define the Gabor filter bank function
 def generate_gabor_filters(size, num_filters):
@@ -20,7 +29,8 @@ def generate_gabor_filters(size, num_filters):
         theta = np.pi * i / num_filters
         kernel = cv2.getGaborKernel((size, size), sigma=3.0, theta=theta, lambd=10.0, gamma=0.5, psi=0)
         filters.append(kernel)
-    return torch.tensor(filters, dtype=torch.float32).unsqueeze(1)
+    filters_array = np.array(filters, dtype=np.float32)
+    return torch.from_numpy(filters_array).unsqueeze(1)
 
 # Define the new network with Gabor filters as the first layer
 class GaborNetwork(nn.Module):
@@ -69,6 +79,7 @@ def train(model, device, train_loader, optimizer, epoch):
         total_loss += loss.item()
     return total_loss / len(train_loader)
 
+# Function to evaluate the accuracy of the model
 def evaluate_accuracy(model, device, test_loader):
     model.eval()
     correct = 0
@@ -104,12 +115,23 @@ for epoch in range(1, num_epochs + 1):
 # Saving the model
 torch.save(model.state_dict(), 'gabor_network_model.pth')
 
-# Visualization of results
+# pull values from the results
 acc_values = [r['accuracy'] for r in experiment_results]
 loss_values = [r['loss'] for r in experiment_results]
 time_values = [r['training_time'] for r in experiment_results]
 epochs = range(1, num_epochs + 1)
 
+# Save the results to a CSV file
+results_file = 'gabor_network_results.csv'
+with open(results_file, 'w', newline='') as file:
+    writer = csv.DictWriter(file, fieldnames=['epoch', 'accuracy', 'training_time', 'loss'])
+    writer.writeheader()
+    for result in experiment_results:
+        writer.writerow(result)
+
+print(f"Results have been saved to {results_file}")
+
+# Visualization of results
 plt.figure(figsize=(12, 4))
 plt.subplot(1, 3, 1)
 plt.plot(epochs, acc_values, '-o')
