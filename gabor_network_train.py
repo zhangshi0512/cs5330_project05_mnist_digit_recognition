@@ -1,3 +1,7 @@
+# Shi Zhang
+# gabor_network_train.py contains the definition of the experiment convolutional neural network
+
+# Import statements
 import cv2
 import torch
 import torch.nn as nn
@@ -23,16 +27,14 @@ class GaborNetwork(nn.Module):
     def __init__(self, gabor_filters, num_fc_nodes):
         super(GaborNetwork, self).__init__()
         self.gabor_filters = nn.Parameter(gabor_filters, requires_grad=False)
-        # Define the rest of the network architecture
         self.conv2 = nn.Conv2d(gabor_filters.shape[0], 20, kernel_size=5)
-        # Assuming the output of conv2 is 20*4*4 after pooling and convolutions
-        self.fc1 = nn.Linear(20*4*4, num_fc_nodes)
-        self.fc2 = nn.Linear(num_fc_nodes, 10)  # MNIST has 10 classes
+        self.fc1 = nn.Linear(20 * 12 * 12, num_fc_nodes)  # Update here
+        self.fc2 = nn.Linear(num_fc_nodes, 10)
 
     def forward(self, x):
         x = F.conv2d(x, self.gabor_filters, padding=2)
         x = F.relu(F.max_pool2d(self.conv2(x), 2))
-        x = x.view(-1, 20*4*4)
+        x = x.view(-1, 20*12*12)
         x = F.relu(self.fc1(x))
         x = self.fc2(x)
         return F.log_softmax(x, dim=1)
