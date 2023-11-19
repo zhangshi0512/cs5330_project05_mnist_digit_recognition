@@ -7,6 +7,7 @@ import matplotlib.pylab as pylab
 from cv2 import filter2D
 from torchvision import datasets, transforms
 from torch.utils.data import DataLoader
+import csv
 
 # resume network
 continued_network = MyNetwork()
@@ -65,4 +66,3 @@ with torch.no_grad():
         col = i % 4
         axs[row, col].imshow(img_list[i], cmap='gray')
     plt.show()
-    

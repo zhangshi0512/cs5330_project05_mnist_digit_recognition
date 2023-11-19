@@ -150,7 +150,17 @@ But 3, 7, 8, 9 were identified wrong given the output.
 
 ##### A. Analyze the first layer
 
+The examination of the network begins with the first convolutional layer, conv1, which consists of ten 5x5 filters.
+
+![filter_weights](Task2/Filter_Weights.png)
+
 ##### B. Show the effect of the filters
+
+Each filtered image highlights specific features or patterns from the original image, dictated by the corresponding filter's unique structure.
+
+![filter_shapes](Task2/Filter_Shapes.png)
+
+For example, some filters may highlight edges or textures, which are essential features for the network to recognize different objects within the images. The use of OpenCV's filter2D function allows for a direct application of these filters to the input image, demonstrating the initial transformation that input data undergoes as it passes through the network's first layer.
 
 #### Task 3: Transfer Learning on Greek Letters
 
@@ -231,6 +241,33 @@ For Average Loss:
 In summary, the experiment confirms that while increasing the number of filters and dense layer nodes can enhance model accuracy, there is a balance to be struck to prevent excessive training times and overfitting. The impact of dropout rates on accuracy and loss underscores the importance of tuning this parameter to the specific characteristics of the dataset and model architecture. These insights should guide future architecture decisions and hyperparameter tuning efforts.
 
 ### 3. Extensions
+
+#### A. Replace the first layer of the MNIST network with a filter bank of Gabor filters
+
+Results:
+
+![Gabor_results](ExtensionTask/gabor_network_results.png)
+
+| epoch | accuracy | training_time | loss     |
+| ----- | -------- | ------------- | -------- |
+| 1     | 0.1135   | 14.93         | 2.344721 |
+| 2     | 0.1135   | 15.17         | 2.301348 |
+| 3     | 0.1135   | 17.35         | 2.301278 |
+| 4     | 0.1135   | 17.18         | 2.301252 |
+| 5     | 0.1135   | 15.15         | 2.301274 |
+| 6     | 0.1135   | 15.02         | 2.301259 |
+| 7     | 0.1135   | 14.99         | 2.301298 |
+| 8     | 0.1135   | 15.18         | 2.301268 |
+| 9     | 0.1135   | 15.12         | 2.301270 |
+| 10    | 0.1135   | 15.31         | 2.301266 |
+
+- Accuracy per Epoch: The accuracy remains relatively constant throughout the epochs, which could suggest that the network is not learning effectively from the Gabor filters or the rest of the architecture is not suitable to improve upon the features extracted by the Gabor filters.
+
+- Loss per Epoch: The loss drops significantly after the first epoch and then stabilizes. This indicates that the network quickly reaches a point where it does not improve further, which might be a sign that the network is stuck in a local minimum or that the initial learning rate is too high and causes overshooting.
+
+- Training Time per Epoch: The training time per epoch fluctuates, which is unusual since the computational effort per epoch typically remains constant. This could be due to varying system loads if running on a shared system or other processes on the machine that interfere with the consistent measurement of time.
+
+#### B. Loading pre-trained networks and evaluate first couple of convolutional layers in Task 2
 
 ### 4. Reflection
 
