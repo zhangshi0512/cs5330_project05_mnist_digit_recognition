@@ -169,6 +169,27 @@ Each filtered image highlights specific features or patterns from the original i
 For example, some filters may highlight edges or textures, which are essential features for the network to recognize different objects within the images. The use of OpenCV's filter2D function allows for a direct application of these filters to the input image, demonstrating the initial transformation that input data undergoes as it passes through the network's first layer.
 
 #### Task 3: Transfer Learning on Greek Letters
+In this experiment phase, we replace the last full connection layer and fine tune the model by using greek training set. 
+
+![Testing Error Plot](Task3/Testing_Error.png)
+![Training Error Plot](Task3/Training_Error.png)
+
+Fine-tuned model is saved in './saved_models/finetuned_model.pth'.
+
+1. MNIST Image Input: 28x28x1 (Grayscale image)
+2. Conv2d: 10 filters, 5x5 kernel, Output Dimension: 24x24x10
+3. ReLU Activation: Dimension: 24x24x10
+4. Max Pooling: 2x2, Output Dimension: 12x12x10
+5. Conv2d: 20 filters, 5x5 kernel, Output Dimension: 8x8x20
+6. Dropout: 0.5, Dimension: 8x8x20
+7. ReLU Activation: Dimension: 8x8x20
+8. Max Pooling: 2x2, Output Dimension: 4x4x20
+9. Flatten: Output Dimension: 320
+10. Linear: 320 to 50, Output Dimension: 50
+11. ReLU Activation: Dimension: 50
+12. Linear: 50 to 3, Output Dimension: 3
+13. Log Softmax: Dimension: 3
+14. Output: Greek Class Label, Dimension: 3
 
 #### Task 4: Experimentation with the deep network for the MNIST task
 
