@@ -176,6 +176,16 @@ In this experiment phase, we replace the last full connection layer and fine tun
 
 Fine-tuned model is saved in './saved_models/finetuned_model.pth'.
 
+## printout    
+
+model MyNetwork(
+  (conv1): Conv2d(1, 10, kernel_size=(5, 5), stride=(1, 1))
+  (conv2): Conv2d(10, 20, kernel_size=(5, 5), stride=(1, 1))
+  (conv2_drop): Dropout2d(p=0.5, inplace=False)
+  (fc1): Linear(in_features=320, out_features=50, bias=True)
+  (fc2): Linear(in_features=50, out_features=3, bias=True)
+)
+
 1. MNIST Image Input: 28x28x1 (Grayscale image)
 2. Conv2d: 10 filters, 5x5 kernel, Output Dimension: 24x24x10
 3. ReLU Activation: Dimension: 24x24x10
