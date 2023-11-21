@@ -24,6 +24,8 @@ for param in model.parameters():
 # do not freeze the last layer to train the model
 model.fc2 = nn.Linear(50, 3)
 
+print('model', model)
+
 # (4) replace the last layer with a new Linear layer with three nodes. 
 
 # greek data set transform
