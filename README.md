@@ -12,6 +12,12 @@ Team: Shi Zhang, ZhiZhou Gu
 
 ### 1. Introduction
 
+In this collaborative project by Shi Zhang and Zhizhou Gu, we aim to explore deep learning through the construction, training, and analysis of a deep neural network focused on digit recognition tasks. Leveraging the widely-used MNIST dataset, we have designed a neural network model featuring layers such as convolution, max pooling, dropout, and linear layers.
+
+This project not only involves building and training the network but also extends to practical applications, testing its efficacy on both standard test images and handwritten digits. Additionally, we delve into network analysis, examining the effects of individual layers, and embark on an experiment with transfer learning using Greek letters.
+
+Our journey culminates in a series of experiments altering various network parameters on the MNIST Fashion dataset, aiming to optimize the network's performance and training efficiency. Through this endeavor, we seek to gain a deeper understanding of neural networks and their capabilities in the realm of image recognition.
+
 ### 2. Visual Demonstrations
 
 #### Task 1: Build and train a network to recognize digits
@@ -269,11 +275,21 @@ Results:
 
 ### 4. Reflection
 
-Shi Zhang:
+Shi Zhang: My work covers Task 1, Task 4, and Extension. This is my first time learned and trained a deep network. This assignment provides me with hands-on experience coding the fundamental structure of deep networks. I think the challenges came from Task 4 exploring a number of experiment models (in my case 64 of them), training a batch took roughly 2-3 hours, but the best accuracy from the results barely reaches 89%, which may indicate some potential issues in the framework of the "flexible" model.
 
 Zhizhou Gu:
 
 ### 5. Acknowledgements
+
+For the online tutorial we referred to:
+
+- [Tutorial 1: MNIST, the Hello World of Deep Learning](https://medium.com/fenwicks/tutorial-1-mnist-the-hello-world-of-deep-learning-abd252c47709#:~:text=,digit%20is%20written%20there)
+
+- [How to Develop a CNN for MNIST Handwritten Digit Classification](https://machinelearningmastery.com/how-to-develop-a-convolutional-neural-network-from-scratch-for-mnist-handwritten-digit-classification/)
+
+- [Deep learning on MNIST - GitHub](https://github.com/numpy/numpy-tutorials/blob/main/content/tutorial-deep-learning-on-mnist.md)
+
+- [Handwritten Digit Recognition with LeNet5 Model in PyTorch](https://machinelearningmastery.com/handwritten-digit-recognition-with-lenet5-model-in-pytorch/)
 
 ## Project Running Instructions
 
