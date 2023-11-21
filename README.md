@@ -242,7 +242,7 @@ In summary, the experiment confirms that while increasing the number of filters 
 
 ### 3. Extensions
 
-#### A. Replace the first layer of the MNIST network with a filter bank of Gabor filters
+#### Replace the first layer of the MNIST network with a filter bank of Gabor filters
 
 Results:
 
@@ -267,10 +267,79 @@ Results:
 
 - Training Time per Epoch: The training time per epoch fluctuates, which is unusual since the computational effort per epoch typically remains constant. This could be due to varying system loads if running on a shared system or other processes on the machine that interfere with the consistent measurement of time.
 
-#### B. Loading pre-trained networks and evaluate first couple of convolutional layers in Task 2
-
 ### 4. Reflection
+
+Shi Zhang:
+
+Zhizhou Gu:
 
 ### 5. Acknowledgements
 
 ## Project Running Instructions
+
+### Project Setup
+
+Our team used Visual Studio Code for this project.
+
+Before running this project, you will need to install several libraries.
+
+The project relies on various Python libraries, including torch, torchvision, matplotlib, numpy, and PIL. To install these libraries, you should open a command prompt or terminal and run the following commands:
+
+```markdown
+pip install opencv-python
+pip install torch torchvision
+pip install matplotlib
+pip install numpy
+pip install pillow
+```
+
+### Project Running by Tasks
+
+#### Task 1
+
+The related files for Task 1 are:
+
+- network.py
+- train.py
+- evaluate_model.py
+- main.py
+
+Please run main.py to see the results.
+
+#### Task 2
+
+The related file for Task 2 is:
+
+- examine_network.py
+
+Please run examine_network.py to see the results.
+
+#### Task 3
+
+The related file for Task 3 is:
+
+- embedding.py
+
+Please run embedding.py to see the results.
+
+#### Task 4
+
+The related files for Task 4 are:
+
+- experiment_network.py
+- experiment_train.py
+- experiment_main.py
+
+Please run experiment_main.py to see the results.
+
+#### Extension
+
+The related file for extension is:
+
+- gabor_network_train.py
+
+Please run gabor_network_train.py to see the results.
+
+### Travel days usage
+
+We did not use any of the travel days for this assignment.

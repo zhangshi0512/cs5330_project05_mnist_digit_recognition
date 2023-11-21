@@ -1,3 +1,5 @@
+# Author: Zhizhou Gu
+
 from network import MyNetwork
 import torch
 import torchvision
