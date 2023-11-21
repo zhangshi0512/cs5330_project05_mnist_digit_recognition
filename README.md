@@ -298,7 +298,7 @@ Results:
 
 Shi Zhang: My work covers Task 1, Task 4, and Extension. This is my first time learned and trained a deep network. This assignment provides me with hands-on experience coding the fundamental structure of deep networks. I think the challenges came from Task 4 exploring a number of experiment models (in my case 64 of them), training a batch took roughly 2-3 hours, but the best accuracy from the results barely reaches 89%, which may indicate some potential issues in the framework of the "flexible" model.
 
-Zhizhou Gu:
+Zhizhou Gu:  My work covers Task 2, Task 3. In the task2 I learned how to visulize weights of filters and effect of each filter apply to the image. Task3 I learned how to fine tune a model. Those tasks give me some hands-on experience of training and evaluating deep learning model by pytorch.
 
 ### 5. Acknowledgements
 
